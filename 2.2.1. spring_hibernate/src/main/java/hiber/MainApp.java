@@ -23,20 +23,12 @@ public class MainApp {
 
       List<User> users = userService.listUsers();
       for (User user : users) {
-         System.out.println("Id = "+user.getId());
-         System.out.println("First Name = "+user.getFirstName());
-         System.out.println("Last Name = " + user.getLastName());
-         System.out.println("Email = " + user.getEmail());
-         if(user.getCar() != null) {
-            System.out.println("Car Model = " + user.getCar().getModel());
-            System.out.println("Car Series = " + user.getCar().getSeries());
-         }
-         System.out.println();
+         System.out.println(user);
       }
 
       User foundUser = userService.findUserByCar("Toyota", 2020);
       if (foundUser != null) {
-         System.out.println("Найден пользователь с автомобилем " + foundUser.getCar().getModel() + ": " + foundUser.getFirstName() + " " + foundUser.getLastName());
+         System.out.printf("Найден пользователь с автомобилем %s: %s %s%n", foundUser.getCar().getModel(), foundUser.getFirstName(), foundUser.getLastName());
       } else {
          System.out.println("Пользователь с такой машиной не найден.");
       }

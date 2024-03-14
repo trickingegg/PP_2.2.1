@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.GenerationType;
 import javax.persistence.CascadeType;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -77,5 +78,37 @@ public class User {
 
    public void setCar(Car car) {
       this.car = car;
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(id, firstName, lastName, email, car);
+   }
+
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj) {
+         return true;
+      }
+      if (!(obj instanceof User)) {
+         return false;
+      }
+      User other = (User) obj;
+      return Objects.equals(id, other.id)&&
+              Objects.equals(firstName, other.firstName) &&
+              Objects.equals(lastName, other.lastName) &&
+              Objects.equals(email, other.email) &&
+              Objects.equals(car, other.car);
+   }
+
+   @Override
+   public String toString() {
+      StringBuilder sb = new StringBuilder();
+      sb.append("Id = : ").append(id).append('\n');
+      sb.append("FirstName : ").append(firstName).append('\n');
+      sb.append("LastName : ").append(lastName).append('\n');
+      sb.append("Email : ").append(email).append('\n');
+      sb.append("Car : ").append(car != null ? car.toString() : "null").append('\n');
+      return sb.toString();
    }
 }
